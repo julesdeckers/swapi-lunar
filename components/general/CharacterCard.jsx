@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const Wrapper = styled.div`
 width: 100%;
@@ -21,8 +22,11 @@ const DetailGrid = styled.div`
 }
 `;
 
+const More = styled.div``;
+
 
 export const CharacterCard = ({data}) => {
+    const [id, setID] = useState(data.url.replace("https://swapi.dev/api/people/", ""));
     return (
         <Wrapper>
             <Title>{data.name}</Title>
@@ -35,6 +39,9 @@ export const CharacterCard = ({data}) => {
                 <p>birth year: {data.birth_year}</p>
                 <p>gender: {data.gender}</p>
             </DetailGrid>
+            <More>
+                <Link href={`character/${id}`}>Meer info</Link>
+            </More>
         </Wrapper>
     )
 };

@@ -29,9 +29,9 @@ export default function Home() {
     fetch('https://swapi.dev/api/people')
       .then((res) => res.json())
       .then((data) => {
-        setData(data)
-        setLoading(false)
-      })
+        setData(data);
+        setLoading(false);
+      });
   }, [])
   return (
     <>
