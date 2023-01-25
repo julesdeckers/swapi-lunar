@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useEffect } from "react";
 
 const Wrapper = styled.div`
 width: 100%;
@@ -21,18 +22,18 @@ const DetailGrid = styled.div`
 `;
 
 
-export const CharacterCard = () => {
+export const CharacterCard = ({data}) => {
     return (
         <Wrapper>
-            <Title>Luke Skywalker</Title>
+            <Title>{data.name}</Title>
             <DetailGrid>
-                <p>height: 172</p>
-                <p>mass: 77kg</p>
-                <p>hair color: blond</p>
-                <p>skin color: fair</p>
-                <p>eye color: blue</p>
-                <p>birth year: 19BBY</p>
-                <p>gender: male</p>
+                <p>height: {data.height}</p>
+                <p>mass: {data.mass}kg</p>
+                <p>hair color: {data.hair_color}</p>
+                <p>skin color: {data.skin_color}</p>
+                <p>eye color: {data.eye_color}</p>
+                <p>birth year: {data.birth_year}</p>
+                <p>gender: {data.gender}</p>
             </DetailGrid>
         </Wrapper>
     )

@@ -1,8 +1,8 @@
 import Head from 'next/head'
-import Image from 'next/image';
+import Link from 'next/link';
 import styled from 'styled-components';
 import { useCharacterStore } from '@lib/stores/StarWarsStore';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import CharacterCard from '@components/general/CharacterCard';
 
@@ -46,12 +46,20 @@ height: auto;
 export default function Home() {
   // const characterStore = useCharacterStore((state) => state.characters);
   // const characters = characterStore.characters;
-
+  const [data, setData] = useState(null);
+  const [chars, setChars] = useState(null);
+  const [isLoading, setLoading] = useState(false);
   useEffect(() => {
-    // characterStore.fetch();
-    // console.log(characters);
-    // console.log(characterStore);
-  }, []);
+    setLoading(true)
+    fetch('https://swapi.dev/api/people')
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data.results)
+        setLoading(false)
+        // setChars(data.results);
+        console.log(data);
+      })
+  }, [])
   return (
     <>
       <Head>
@@ -65,23 +73,11 @@ export default function Home() {
             <p>Sidebar</p>
             <h1>Swapi</h1>
           </SideBar>
+          {isLoading && <p>Loading...</p>}
           <MainView>
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
-            <CharacterCard />
+            {data &&
+             data.map((char, index) => { return (<CharacterCard data={char} key={index} />)})
+            }
           </MainView>
         </Layout>
       </Container>
