@@ -47,7 +47,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {isLoading
-        ? <p>Loading...</p>
+        ? <MainView><p>Loading...</p></MainView>
         : <MainView>
           {data &&
             data.results.map((char, index) => { return (<CharacterCard data={char} key={index} />) })
