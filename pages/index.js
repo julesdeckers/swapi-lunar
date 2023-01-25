@@ -4,7 +4,10 @@ import styled from 'styled-components';
 import { useCharacterStore } from '@lib/stores/StarWarsStore';
 import { useEffect, useState } from 'react';
 
+import { API_URL } from '@utils/API_URL';
+
 import CharacterCard from '@components/general/CharacterCard';
+
 
 const MainView = styled.div`
 grid-area: main;
@@ -22,17 +25,20 @@ height: auto;
 export default function Home() {
   // const characterStore = useCharacterStore((state) => state.characters);
   // const characters = characterStore.characters;
+  const [url, setUrl] = useState(`${API_URL}/people`)
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true)
-    fetch('https://swapi.dev/api/people')
+    console.log(url);
+    fetch(url)
       .then((res) => res.json())
       .then((data) => {
         setData(data);
         setLoading(false);
+        console.log(data);
       });
-  }, [])
+  }, [url])
   return (
     <>
       <Head>
@@ -45,6 +51,13 @@ export default function Home() {
         {data &&
           data.results.map((char, index) => { return (<CharacterCard data={char} key={index} />) })
         }
+        {data?.previous && 
+           <button onClick={() => setUrl(data.previous)}>previous</button>
+        }
+        {data?.next && 
+           <button onClick={() => setUrl(data.next)}>next</button>
+        }
+        
       </MainView>
     </>
   )

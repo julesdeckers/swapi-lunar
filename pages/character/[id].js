@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from "react";
 
 import Films from "@components/character/Films";
+import Starships from "@components/character/Starships";
+import Vehicles from "@components/character/Vehicles";
 
 const MainView = styled.div`
 grid-area: main;
@@ -14,7 +16,7 @@ height: auto;
 `;
 
 const Title = styled.h2`
-font-size: 2rem;
+font-size: 3rem;
 font-weight: bold;
 `;
 
@@ -30,7 +32,6 @@ export const CharacterDetail = ({ slug }) => {
             .then((data) => {
                 setData(data);
                 setLoading(false);
-                console.log(data);
             });
     }, []);
     if (isLoading) return <p>Loading...</p>
@@ -38,7 +39,6 @@ export const CharacterDetail = ({ slug }) => {
     return (
         <MainView>
             <p><Link href="/">Back</Link></p>
-            <p>{id}</p>
             <Title>{data.name}</Title>
             <p>height: {data.height}</p>
             <p>mass: {data.mass}kg</p>
@@ -48,6 +48,7 @@ export const CharacterDetail = ({ slug }) => {
             <p>birth year: {data.birth_year}</p>
             <p>gender: {data.gender}</p>
             <Films urls={data.films}/>
+            <Starships urls={data.starships}/>
         </MainView>
     )
 };
