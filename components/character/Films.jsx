@@ -1,33 +1,25 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 
+import usePromiseFetch from "@lib/hooks/usePromiseFetch";
+
 const Title = styled.h2`
 font-size: 2rem;
 font-weight: bold;
 `;
 
 export const Films = ({ urls }) => {
-    const [films, setFilms] = useState(null);
-    const [isLoading, setLoading] = useState(false);
-    useEffect(() => {
-        setLoading(true)
-        const Promises = [];
-        urls.forEach(url => {
-            Promises.push(fetch(url));
-        });
-        Promise.all(Promises).then(result => Promise.all(result.map((res) => res.json()))).then(data => setFilms(data));
-        setLoading(false);
-    }, [])
-    if (isLoading) return <p>Loading...</p>
-    if (!films) return <div> <Title>Films</Title><p>No film data</p></div>
+    const {data, isLoading} = usePromiseFetch(urls);
+    if (isLoading) return <p>Laden...</p>;
+    if (!data) return <div> <Title>Films</Title><p>Film data laden...</p></div>;
     return (
         <>
             <Title>Films</Title>
             {isLoading
                 ? <p>Loading...</p>
-                : films.length >> 0
+                : data.length >> 0
                     ? <ul>
-                        {films.map((film, key) =>
+                        {data.map((film, key) =>
                             <li key={key}>
                                 {film.title}
                             </li>

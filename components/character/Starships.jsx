@@ -1,34 +1,25 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 
+import usePromiseFetch from "@lib/hooks/usePromiseFetch";
+
 const Title = styled.h2`
 font-size: 2rem;
 font-weight: bold;
 `;
 
 export const Starships = ({ urls }) => {
-    const [starships, setStarships] = useState(null);
-    const [isLoading, setLoading] = useState(false);
-    useEffect(() => {
-        setLoading(true)
-        const Promises = [];
-        urls.forEach(url => {
-            Promises.push(fetch(url));
-        });
-        Promise.all(Promises).then(result => Promise.all(result.map((res) => res.json()))).then(data => setStarships(data));
-        setLoading(false);
-        console.log(starships)
-    }, [])
-    if (isLoading) return <p>Loading...</p>
-    if (!starships) return <div><p>No film data</p></div>
+    const {data, isLoading} = usePromiseFetch(urls);
+    if (isLoading) return <p>Laden...</p>;
+    if (!data) return <div><Title>Starships</Title><p>Starship data laden...</p></div>;
     return (
         <>
             <Title>Starships</Title>
             {isLoading
                 ? <p>Loading...</p>
-                : starships.length >> 0
+                : data.length >> 0
                     ? <ul>
-                        {starships.map((ship, key) =>
+                        {data.map((ship, key) =>
                             <li key={key}>
                                 {ship.name}
                             </li>

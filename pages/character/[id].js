@@ -8,6 +8,7 @@ import { API_URL } from "@utils/API_URL";
 import Films from "@components/character/Films";
 import Starships from "@components/character/Starships";
 import Vehicles from "@components/character/Vehicles";
+import useFetch from "@lib/hooks/useFetch";
 
 const MainView = styled.div`
 grid-area: main;
@@ -25,17 +26,7 @@ font-weight: bold;
 export const CharacterDetail = ({ slug }) => {
     const router = useRouter();
     const { id } = router.query;
-    const [data, setData] = useState(null);
-    const [isLoading, setLoading] = useState(false);
-    useEffect(() => {
-        setLoading(true)
-        fetch(`${API_URL}/people/${id}`)
-            .then((res) => res.json())
-            .then((data) => {
-                setData(data);
-                setLoading(false);
-            });
-    }, []);
+    const { data, isLoading } = useFetch(`${API_URL}/people/${id}`);
     if (isLoading) return <p>Loading...</p>
     if (!data) return <div><p onClick={() => router.back()}>Back</p><p>No profile data</p></div>
     return (

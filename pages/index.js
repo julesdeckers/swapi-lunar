@@ -1,9 +1,10 @@
 import Head from 'next/head'
 import Link from 'next/link';
 import styled from 'styled-components';
-import { useCharacterStore } from '@lib/stores/StarWarsStore';
 import { useEffect, useState } from 'react';
 
+import useFetch from '@lib/hooks/useFetch';
+import { useCharacterStore } from '@lib/stores/StarWarsStore';
 import { API_URL } from '@utils/API_URL';
 
 import CharacterCard from '@components/general/CharacterCard';
@@ -23,22 +24,18 @@ height: auto;
 `;
 
 export default function Home() {
-  // const characterStore = useCharacterStore((state) => state.characters);
-  // const characters = characterStore.characters;
-  const [url, setUrl] = useState(`${API_URL}/people`)
-  const [data, setData] = useState(null);
-  const [isLoading, setLoading] = useState(false);
-  useEffect(() => {
-    setLoading(true)
-    console.log(url);
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-        console.log(data);
-      });
-  }, [url])
+  const [url, setUrl] = useState(`${API_URL}/people`);
+  const { data, isLoading } = useFetch(url);
+  // useEffect(() => {
+  //   setLoading(true)
+  //   console.log(url);
+  //   fetch(url)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setData(data);
+  //       setLoading(false);
+  //     });
+  // }, [url])
   return (
     <>
       <Head>
@@ -47,7 +44,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {isLoading
-        ? <MainView><p>Loading...</p></MainView>
+        ? <MainView><p>Laden...</p></MainView>
         : <MainView>
           {data &&
             data.results.map((char, index) => { return (<CharacterCard data={char} key={index} />) })
