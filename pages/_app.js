@@ -1,18 +1,29 @@
-import Head from 'next/head';
+import Router from 'next/router';
+import nProgress from 'nprogress';
+import '@styles/progressbar.css';
 import DefaultLayout from "../layouts/default";
 import 'modern-normalize';
-import '../styles/globals.scss'
+import '../styles/globals.scss';
+import { ThemeProvider } from "styled-components";
+import { colors } from "@utils/palette";
+
+//Binding events. 
+Router.events.on('routeChangeStart', () => nProgress.start());
+Router.events.on('routeChangeComplete', () => nProgress.done());
+Router.events.on('routeChangeError', () => nProgress.done());
+
+
+const theme = {
+  colors: colors,
+}
 
 function MyApp({ Component, pageProps }) {
   return (
-    <>
-      <Head>
-        <title>Directus Next.js Example</title>
-      </Head>
+    <ThemeProvider theme={theme}>
       <DefaultLayout>
         <Component {...pageProps} />
       </DefaultLayout>
-    </>
+    </ThemeProvider>
   )
 }
 

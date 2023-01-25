@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Image from "next/image";
-import logo from "../../public/logo2x.png";
 
 const Wrapper = styled.div`
 background-color: #00A3A3;
@@ -11,7 +10,7 @@ place-items: center;
 `;
 
 export const Header = () => {
-	return <Wrapper><Image src={logo} alt="Pampers" /></Wrapper>;
+	return <Wrapper></Wrapper>;
 };
 
 export default Header;

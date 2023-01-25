@@ -8,6 +8,7 @@ specifiers:
   modern-normalize: ^1.1.0
   next: 12.2.0
   next-auth: ^4.12.2
+  nprogress: ^0.2.0
   postcss: ^8.4.14
   prettier: ^2.7.1
   prisma: ^4.1.0
@@ -22,6 +23,7 @@ dependencies:
   modern-normalize: 1.1.0
   next: 12.2.0_b7sksnfkdyiidz7vzaadim75qm
   next-auth: 4.12.2_24lkarzjpo3wcmj2o6qyrkug4y
+  nprogress: 0.2.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   sass: 1.53.0
@@ -1833,6 +1835,10 @@ packages:
     resolution: {integrity: sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /nprogress/0.2.0:
+    resolution: {integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==}
+    dev: false
 
   /oauth/0.9.15:
     resolution: {integrity: sha512-a5ERWK1kh38ExDEfoO6qUHJb32rd7aYmPHuyCu3Fta/cnICvYmgd2uhuKXvPD+PXB+gCEYYEaQdIRAjCOwAKNA==}
