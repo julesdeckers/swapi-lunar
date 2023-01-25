@@ -37,10 +37,10 @@ export const CharacterDetail = ({ slug }) => {
             });
     }, []);
     if (isLoading) return <p>Loading...</p>
-    if (!data) return <div><p><Link href="/">Back</Link></p><p>No profile data</p></div>
+    if (!data) return <div><p onClick={() => router.back()}>Back</p><p>No profile data</p></div>
     return (
         <MainView>
-            <p><Link href="/">Back</Link></p>
+            <p onClick={() => router.back()}>Back</p>
             <Title>{data.name}</Title>
             <p>height: {data.height}</p>
             <p>mass: {data.mass}kg</p>
