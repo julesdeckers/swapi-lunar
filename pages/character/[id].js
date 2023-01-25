@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useRouter } from 'next/router';
 import { useEffect, useState } from "react";
 
+import { API_URL } from "@utils/API_URL";
+
 import Films from "@components/character/Films";
 import Starships from "@components/character/Starships";
 import Vehicles from "@components/character/Vehicles";
@@ -27,7 +29,7 @@ export const CharacterDetail = ({ slug }) => {
     const [isLoading, setLoading] = useState(false);
     useEffect(() => {
         setLoading(true)
-        fetch(`https://swapi.dev/api/people/${id}`)
+        fetch(`${API_URL}/people/${id}`)
             .then((res) => res.json())
             .then((data) => {
                 setData(data);

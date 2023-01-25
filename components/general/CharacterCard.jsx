@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
+import { API_URL } from "@utils/API_URL";
+
 const Wrapper = styled.div`
 width: 100%;
 box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
@@ -26,7 +28,7 @@ const More = styled.div``;
 
 
 export const CharacterCard = ({data}) => {
-    const [id, setID] = useState(data.url.replace("https://swapi.dev/api/people/", ""));
+    const [id, setID] = useState(data.url.replace(`${API_URL}/people/`, ""));
     return (
         <Wrapper>
             <Title>{data.name}</Title>
