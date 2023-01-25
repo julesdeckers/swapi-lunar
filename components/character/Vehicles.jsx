@@ -23,13 +23,16 @@ export const Vehicles = ({ urls }) => {
     return (
         <>
             <Title>vehicles</Title>
-            <ul>
-                {vehicles.map((veh, key) =>
-                    <li key={key}>
-                        {veh.name}
-                    </li>
-                )}
-            </ul>
+            {isLoading
+                ? <p>Loading...</p>
+                : <ul>
+                    {vehicles.map((veh, key) =>
+                        <li key={key}>
+                            {veh.name}
+                        </li>
+                    )}
+                </ul>
+            }
         </>
     )
 }

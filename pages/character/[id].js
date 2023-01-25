@@ -41,16 +41,21 @@ export const CharacterDetail = ({ slug }) => {
     return (
         <MainView>
             <p onClick={() => router.back()}>Back</p>
-            <Title>{data.name}</Title>
-            <p>height: {data.height}</p>
-            <p>mass: {data.mass}kg</p>
-            <p>hair color: {data.hair_color}</p>
-            <p>skin color: {data.skin_color}</p>
-            <p>eye color: {data.eye_color}</p>
-            <p>birth year: {data.birth_year}</p>
-            <p>gender: {data.gender}</p>
-            <Films urls={data.films}/>
-            <Starships urls={data.starships}/>
+            {isLoading
+                ? <p>Loading...</p>
+                : <div>
+                    <Title>{data.name}</Title>
+                    <p>height: {data.height}</p>
+                    <p>mass: {data.mass}kg</p>
+                    <p>hair color: {data.hair_color}</p>
+                    <p>skin color: {data.skin_color}</p>
+                    <p>eye color: {data.eye_color}</p>
+                    <p>birth year: {data.birth_year}</p>
+                    <p>gender: {data.gender}</p>
+                    <Films urls={data.films} />
+                    <Starships urls={data.starships} />
+                </div>
+            }
         </MainView>
     )
 };

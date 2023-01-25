@@ -24,13 +24,16 @@ export const Starships = ({ urls }) => {
     return (
         <>
             <Title>Starships</Title>
-            <ul>
-                {starships.map((ship, key) =>
-                    <li key={key}>
-                        {ship.name}
-                    </li>
-                )}
-            </ul>
+            {isLoading
+                ? <p>Loading...</p>
+                : <ul>
+                    {starships.map((ship, key) =>
+                        <li key={key}>
+                            {ship.name}
+                        </li>
+                    )}
+                </ul>
+            }
         </>
     )
 }

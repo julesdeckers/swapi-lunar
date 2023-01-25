@@ -23,13 +23,16 @@ export const Films = ({ urls }) => {
     return (
         <>
             <Title>Films</Title>
-            <ul>
-                {films.map((film, key) =>
-                    <li key={key}>
-                        {film.title}
-                    </li>
-                )}
-            </ul>
+            {isLoading
+                ? <p>Loading...</p>
+                : <ul>
+                    {films.map((film, key) =>
+                        <li key={key}>
+                            {film.title}
+                        </li>
+                    )}
+                </ul>
+            }
         </>
     )
 }

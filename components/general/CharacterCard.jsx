@@ -27,11 +27,10 @@ const DetailGrid = styled.div`
 const More = styled.div``;
 
 
-export const CharacterCard = ({ data, url }) => {
+export const CharacterCard = ({ data }) => {
     const [id, setID] = useState(data.url.replace(`${API_URL}/people/`, ""));
     useEffect(() => {
         setID(data.url.replace(`${API_URL}/people/`, ""));
-        console.log(data);
     }, []);
     return (
         <Wrapper>
