@@ -19,19 +19,21 @@ export const Films = ({ urls }) => {
         setLoading(false);
     }, [])
     if (isLoading) return <p>Loading...</p>
-    if (!films) return <div><p>No film data</p></div>
+    if (!films) return <div> <Title>Films</Title><p>No film data</p></div>
     return (
         <>
             <Title>Films</Title>
             {isLoading
                 ? <p>Loading...</p>
-                : <ul>
-                    {films.map((film, key) =>
-                        <li key={key}>
-                            {film.title}
-                        </li>
-                    )}
-                </ul>
+                : films.length >> 0
+                    ? <ul>
+                        {films.map((film, key) =>
+                            <li key={key}>
+                                {film.title}
+                            </li>
+                        )}
+                    </ul>
+                    : <p>Geen films</p>
             }
         </>
     )

@@ -11,6 +11,7 @@ place-items: center;
 position: fixed;
 top: 0;
 left: 0;
+box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 `;
 
 const Logo = styled.div`

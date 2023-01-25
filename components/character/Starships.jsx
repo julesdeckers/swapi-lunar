@@ -26,13 +26,15 @@ export const Starships = ({ urls }) => {
             <Title>Starships</Title>
             {isLoading
                 ? <p>Loading...</p>
-                : <ul>
-                    {starships.map((ship, key) =>
-                        <li key={key}>
-                            {ship.name}
-                        </li>
-                    )}
-                </ul>
+                : starships.length >> 0
+                    ? <ul>
+                        {starships.map((ship, key) =>
+                            <li key={key}>
+                                {ship.name}
+                            </li>
+                        )}
+                    </ul>
+                    : <p>Geen starships</p>
             }
         </>
     )
