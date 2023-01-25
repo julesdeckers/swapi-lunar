@@ -8,6 +8,9 @@ height: 10rem;
 width: 100%;
 display: grid;
 place-items: center;
+position: fixed;
+top: 0;
+left: 0;
 `;
 
 const Logo = styled.div`
