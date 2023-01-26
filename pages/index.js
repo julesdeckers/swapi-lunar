@@ -4,8 +4,10 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 
 import useFetch from '@lib/hooks/useFetch';
+import usePromiseFetch from '@lib/hooks/usePromiseFetch';
+import useCharacterFetch from '@lib/hooks/useCharacterFetch';
 import { useCharacterStore } from '@lib/stores/StarWarsStore';
-import { API_URL } from '@utils/API_URL';
+import { API_URL, URLS } from '@utils/API_URL';
 
 import CharacterCard from '@components/general/CharacterCard';
 
@@ -26,16 +28,12 @@ height: auto;
 export default function Home() {
   const [url, setUrl] = useState(`${API_URL}/people`);
   const { data, isLoading } = useFetch(url);
-  // useEffect(() => {
-  //   setLoading(true)
-  //   console.log(url);
-  //   fetch(url)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setData(data);
-  //       setLoading(false);
-  //     });
-  // }, [url])
+  const { fulldata, isFullLoading } = useCharacterFetch(URLS);
+  const [characters, setCharacters] = useState(null);
+  useEffect(() => {
+    if (!isLoading && data) setCharacters(data.results);
+    if (!isFullLoading && fulldata) setCharacters(fulldata);
+  }, []);
   return (
     <>
       <Head>
@@ -48,12 +46,6 @@ export default function Home() {
         : <MainView>
           {data &&
             data.results.map((char, index) => { return (<CharacterCard data={char} key={index} />) })
-          }
-          {data?.previous &&
-            <button onClick={() => setUrl(data.previous)}>previous</button>
-          }
-          {data?.next &&
-            <button onClick={() => setUrl(data.next)}>next</button>
           }
         </MainView>
       }
