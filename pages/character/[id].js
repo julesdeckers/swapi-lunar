@@ -27,8 +27,8 @@ export const CharacterDetail = ({ slug }) => {
     const router = useRouter();
     const { id } = router.query;
     const { data, isLoading } = useFetch(`${API_URL}/people/${id}`);
-    if (isLoading) return <p>Loading...</p>
-    if (!data) return <div><p onClick={() => router.back()}>Back</p><p>No profile data</p></div>
+    if (isLoading) return <MainView><p>Loading...</p></MainView>
+    if (!data) return <MainView><p onClick={() => router.back()}>Back</p><p>No profile data</p></MainView>
     return (
         <MainView>
             <p onClick={() => router.back()}>Back</p>
