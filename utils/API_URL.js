@@ -8,5 +8,5 @@ export const URLS = [
     `${API_URL}/people/?page=6`,
     `${API_URL}/people/?page=7`,
     `${API_URL}/people/?page=8`,
-    `${API_URL}/people/?page=9`,
+    `${API_URL}/people/?page=9`
 ]
